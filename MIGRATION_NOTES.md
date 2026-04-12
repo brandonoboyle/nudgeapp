@@ -30,4 +30,26 @@ _(structural improvements worth considering once everything is wired up)_
 - `writingStatsStore`: The `editorBaselines` and `editorHighWater` maps live outside Zustand state (module-level). This is correct — they're transient per-session tracking that shouldn't trigger re-renders. But it means they won't survive React hot reloads in dev. Acceptable trade-off.
 - `uiStore`: The `showNewProjectOverlay` setter was implicit in Svelte (direct assignment). Added an explicit `setShowNewProjectOverlay` method. Check in Phase 5/6 if components need it.
 
+### Phase 7 Observations
+
+- `proxy.ts` was not wired as Next.js middleware — renamed to `middleware.ts` so the auth route protection actually activates. The middleware was correctly written but living at the wrong filename.
+- The audit confirmed no client code calls POST on `/api/projects` — project creation is client-side (Zustand + localStorage), then syncs via PUT to `/api/projects/[id]`. The GET endpoint hydrates on load. No missing endpoint.
+- Settings sync uses PUT (not POST), which matches the API route handler. No mismatch.
+- The `getCurrentProject()` selector pattern in Zustand (`useProjectStore(s => s.getCurrentProject())`) re-evaluates on every state change because the store spreads `projects` on mutation. Functional but could be tightened in Phase 8 with a derived selector.
+
+### Phase 6 Observations
+
+- Landing page is a Server Component (no `'use client'`) — metadata, OG tags, and canonical URL are exported via Next.js `Metadata` API instead of `<svelte:head>`. Scroll/intersection animations are isolated to a tiny `LandingAnimations` client component.
+- Landing page uses a `(marketing)` route group to keep it separate from the app without affecting the URL structure.
+- App shell uses a server-side `auth()` check in `page.tsx` that redirects to `/login` if unauthenticated, then renders `AppShell` (client component) with `userEmail` as a prop. This replaces Svelte's `+page.server.ts` load function.
+- The Svelte version used `$bindable()` for `showSettings`/`showExport` — React version uses `open`/`onClose` callback props (consistent with Phase 5 ExportModal/Settings).
+- Sidebar content is extracted as a JSX variable shared between mobile and desktop layouts to avoid duplication. In Svelte this was two separate template blocks.
+
+### Phase 5 Observations
+
+- `MasterEditor` and `CollabEditor` share ~90% of their code (toolbar, CodeMirror setup, autosave, stats tracking). The only differences are theme (gold vs teal), placeholder text, badge label, and H1 token color. In Phase 8, consider extracting a shared `NudgeEditor` component that accepts an `accent` prop.
+- `ExportModal` and `Settings` both use `$bindable()` for `open` in Svelte. In React, converted to `open` + `onClose` callback pattern — cleaner prop direction.
+- `FolderTree` uses `svelte:window onclick` to close context menus. Ported to a `useEffect` with `window.addEventListener('click', ...)` — same behavior but the cleanup is explicit.
+- `Settings` sign-out changed from `<form method="POST" action="/auth/signout">` to `signOut()` from `next-auth/react` — no full page reload, cleaner SPA behavior.
+
 ---

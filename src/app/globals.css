@@ -229,3 +229,24 @@ a {
 	color: var(--text-accent);
 	text-decoration: none;
 }
+
+/* ---- Landing page scroll reveal ---- */
+.appear {
+	opacity: 0;
+	transform: translateY(28px);
+	transition:
+		opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s),
+		transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0s);
+}
+.appear.in-view {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.appear {
+		transition: none;
+		opacity: 1;
+		transform: none;
+	}
+}

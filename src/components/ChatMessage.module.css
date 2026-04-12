@@ -1,0 +1,137 @@
+.message {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+.message.user {
+  flex-direction: row-reverse;
+}
+
+/* -- Avatar -- */
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--master-gold-dim);
+  border: 1.5px solid var(--master-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* -- Bubble -- */
+.bubble {
+  max-width: 84%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.content {
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.assistant .content {
+  background: var(--input-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px 12px 12px 12px;
+  box-shadow: var(--shadow-xs);
+}
+
+.user .content {
+  background: var(--text-primary);
+  color: var(--warm-white);
+  border-radius: 12px 4px 12px 12px;
+}
+
+/* markdown rendering */
+.content :global(p) {
+  margin: 0;
+}
+.content :global(p + p) {
+  margin-top: 0.6em;
+}
+.content :global(em) {
+  font-style: italic;
+}
+.content :global(strong) {
+  font-weight: 600;
+}
+
+/* -- Retry button -- */
+.retryBtn {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  cursor: pointer;
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+
+.retryBtn:hover {
+  color: var(--text-secondary);
+  border-color: var(--border-light);
+}
+
+/* -- Timestamp -- */
+.timestamp {
+  font-size: 0.67rem;
+  color: var(--text-muted);
+  align-self: flex-end;
+  font-style: italic;
+}
+
+.user .timestamp {
+  align-self: flex-end;
+}
+
+/* -- Thinking dots -- */
+.thinking {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 2px 0;
+}
+
+.thinking .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.thinking .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.thinking .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

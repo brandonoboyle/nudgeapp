@@ -4,7 +4,7 @@ Use this document to prompt a new Claude Code session to continue the Svelte →
 
 ## Prompt to paste
 
-> I'm migrating a Svelte app (`/apps/nudge/`) to Next.js (`/apps/nudgeapp/`). Phases 1-4 are complete. I need to continue with Phase 5: converting 9 Svelte components to React.
+> I'm migrating a Svelte app (`/apps/nudge/`) to Next.js (`/apps/nudgeapp/`). Phases 1-7 are complete. I need to continue with Phase 8: Cleanup & Optimization — review MIGRATION_NOTES.md and act on confirmed improvements.
 >
 > Read these files for full context:
 > - `nudgeapp/MIGRATION_PLAN.md` — phase checklist
@@ -61,7 +61,7 @@ src/lib/stores/projectStore.ts — Zustand project state
 src/lib/stores/settingsStore.ts — Zustand settings state
 src/lib/stores/uiStore.ts     — Zustand UI state
 src/lib/stores/writingStatsStore.ts — Zustand writing stats
-src/proxy.ts                   — Route guard + security headers
+src/middleware.ts               — Route guard + security headers
 src/app/globals.css            — Design system (4 themes)
 src/app/layout.tsx             — Root layout (Lora + Playfair Display)
 src/app/(auth)/auth.module.css — Shared auth styles

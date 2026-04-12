@@ -1,0 +1,288 @@
+/* -- Row shared -- */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.28rem 0.5rem 0.28rem calc(0.5rem + var(--depth, 0) * 14px);
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: background var(--t-fast);
+  min-height: 28px;
+}
+
+.row:hover {
+  background: var(--sidebar-hover);
+}
+
+.row.active {
+  background: var(--off-white);
+}
+
+/* -- Folder row -- */
+.folderRow.master {
+  border-left: 2.5px solid var(--master-gold);
+  padding-left: calc(0.35rem + var(--depth, 0) * 14px);
+}
+
+.folderRow.master .rowLabel {
+  color: var(--text-gold);
+  font-weight: 600;
+}
+
+.chevron {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  transition: transform var(--t-fast);
+  display: inline-block;
+  width: 10px;
+  flex-shrink: 0;
+}
+
+.chevron.open {
+  transform: rotate(90deg);
+}
+
+.folderIcon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.masterIcon {
+  color: var(--master-gold);
+}
+
+/* -- Row label -- */
+.rowLabel {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* -- Menu button -- */
+.menuBtn {
+  opacity: 0;
+  padding: 0 0.2rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  line-height: 1;
+  border-radius: 3px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    opacity var(--t-fast),
+    background var(--t-fast);
+  flex-shrink: 0;
+}
+
+.row:hover .menuBtn {
+  opacity: 1;
+}
+
+.menuBtn:focus-visible {
+  opacity: 1;
+}
+
+.menuBtn:hover {
+  background: var(--border-light);
+}
+
+@media (hover: none) {
+  .menuBtn {
+    opacity: 1;
+  }
+}
+
+/* -- File row -- */
+.fileRow {
+  padding-left: calc(1.2rem + var(--depth, 0) * 14px);
+}
+
+.fileBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  min-width: 0;
+}
+
+.fileIcon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.fileLabel {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileRow.active .fileLabel {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* -- Rename input -- */
+.renameInput {
+  flex: 1;
+  font-size: 0.82rem;
+  font-family: var(--font-serif);
+  color: var(--text-primary);
+  border: 1px solid var(--master-gold);
+  border-radius: 3px;
+  padding: 1px 4px;
+  background: var(--input-bg);
+  outline: none;
+  min-width: 0;
+}
+
+/* -- Context menu -- */
+.contextMenu {
+  position: fixed;
+  z-index: 200;
+  background: var(--input-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  padding: 0.3rem;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.contextMenu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.82rem;
+  font-family: var(--font-serif);
+  color: var(--text-secondary);
+  border-radius: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background var(--t-fast);
+}
+
+.contextMenu button:hover {
+  background: var(--off-white);
+  color: var(--text-primary);
+}
+
+.contextMenu button.danger:hover {
+  background: rgba(192, 57, 43, 0.1);
+  color: #c0392b;
+}
+
+.menuDivider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 0.2rem 0;
+}
+
+/* -- Delete confirmation -- */
+.deleteConfirm {
+  padding: 0.4rem 0.3rem 0.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.confirmText {
+  font-size: 0.78rem;
+  font-family: var(--font-serif);
+  color: var(--text-primary);
+  padding: 0 0.4rem;
+  font-weight: 600;
+}
+
+.confirmHint {
+  font-size: 0.72rem;
+  font-family: var(--font-serif);
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 0 0.4rem;
+}
+
+.confirmActions {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.2rem;
+}
+
+.confirmActions button {
+  flex: 1;
+  justify-content: center;
+  text-align: center;
+}
+
+/* -- Folder contents -- */
+.folderContents {
+  display: flex;
+  flex-direction: column;
+}
+
+/* -- Context visibility toggle -- */
+.contextToggle {
+  opacity: 0;
+  padding: 0 0.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    opacity var(--t-fast),
+    background var(--t-fast);
+  flex-shrink: 0;
+}
+
+.contextToggle.excluded {
+  opacity: 1;
+}
+
+.row:hover .contextToggle {
+  opacity: 1;
+}
+
+.contextToggle:focus-visible {
+  opacity: 1;
+}
+
+.contextToggle:hover {
+  background: var(--border-light);
+}
+
+.contextToggle svg {
+  display: block;
+  color: var(--collab-teal);
+}
+.contextToggle.excluded svg {
+  color: var(--text-muted);
+}
+
+@media (hover: none) {
+  .contextToggle {
+    opacity: 1;
+  }
+}

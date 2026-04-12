@@ -1,0 +1,201 @@
+.masterEditor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--master-bg);
+}
+
+/* -- Toolbar -- */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.45rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--master-bg);
+  flex-shrink: 0;
+}
+
+.toolbarGroup {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.toolbarBtn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  border-radius: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background var(--t-fast);
+  font-family: var(--font-serif);
+}
+
+.toolbarBtn:hover {
+  background: var(--off-white);
+  color: var(--text-primary);
+}
+
+.boldBtn {
+  font-weight: 700;
+}
+
+.toolbarDivider {
+  width: 1px;
+  height: 16px;
+  background: var(--border-subtle);
+  margin: 0 0.2rem;
+}
+
+.toolbarSpacer {
+  flex: 1;
+}
+
+.masterBadge {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-gold);
+  background: var(--master-gold-dim);
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  font-family: var(--font-serif);
+  border: 1px solid rgba(196, 160, 96, 0.3);
+}
+
+/* -- Writing surface -- */
+.writingSurface {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+
+.editorMount {
+  width: 100%;
+  max-width: 680px;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* -- Markdown token styles -- */
+.editorMount :global(.tok-heading1) {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: var(--master-gold);
+}
+
+.editorMount :global(.tok-heading2) {
+  font-size: 1.22em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.editorMount :global(.tok-heading3) {
+  font-size: 1.07em;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.editorMount :global(.tok-strong) {
+  font-weight: 700;
+}
+
+.editorMount :global(.tok-emphasis) {
+  font-style: italic;
+}
+
+.editorMount :global(.tok-strikethrough) {
+  text-decoration: line-through;
+}
+
+.editorMount :global(.tok-monospace) {
+  font-family: monospace;
+  font-size: 0.88em;
+  color: var(--text-accent);
+}
+
+.editorMount :global(.tok-link) {
+  color: var(--collab-teal);
+  text-decoration: underline;
+}
+
+.editorMount :global(.tok-url) {
+  color: var(--collab-teal);
+  opacity: 0.65;
+}
+
+.editorMount :global(.tok-quote) {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.editorMount :global(.tok-processingInstruction) {
+  font-size: 0;
+}
+
+.editorMount :global(.tok-meta) {
+  font-size: 0;
+}
+
+/* -- Footer -- */
+.editorFooter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.45rem 1.2rem;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--master-bg);
+  flex-shrink: 0;
+}
+
+.fileName {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  flex: 1;
+}
+
+.footerStats {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.stat {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.statDivider {
+  color: var(--border-medium);
+}
+
+.saveIndicator {
+  font-size: 0.72rem;
+  min-width: 50px;
+  text-align: right;
+}
+
+.saving {
+  color: var(--text-muted);
+  font-style: italic;
+  animation: fadePulse 1s ease infinite;
+}
+
+.saved {
+  color: var(--collab-teal);
+}
+
+@keyframes fadePulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}

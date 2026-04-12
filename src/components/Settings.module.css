@@ -1,0 +1,470 @@
+/* -- Backdrop -- */
+.settingsBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* -- Panel -- */
+.settingsPanel {
+  background: var(--warm-white);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  width: 500px;
+  max-width: calc(100vw - 2rem);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* -- Header -- */
+.settingsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.settingsTitle {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.closeBtn {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 0.25rem 0.4rem;
+  border-radius: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color var(--t-fast), background var(--t-fast);
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  color: var(--text-primary);
+  background: var(--off-white);
+}
+
+/* -- Tabs -- */
+.tabBar {
+  display: flex;
+  padding: 0 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  gap: 0;
+}
+
+.tabBtn {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 0.6rem 0.85rem;
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+
+.tabBtn:hover {
+  color: var(--text-secondary);
+}
+
+.tabBtn.activeTab {
+  color: var(--text-primary);
+  border-bottom-color: var(--master-gold);
+}
+
+/* -- Tab content -- */
+.tabContent {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-height: 260px;
+}
+
+/* -- Setting rows -- */
+.settingRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.settingLabel {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: var(--font-serif);
+  min-width: 68px;
+  flex-shrink: 0;
+}
+
+/* -- Theme swatches -- */
+.themeSwatches {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.themeSwatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color var(--t-fast), transform var(--t-fast);
+  min-width: 64px;
+}
+
+.themeSwatch:hover {
+  transform: translateY(-1px);
+}
+
+.themeSwatch.activeSwatch {
+  border-color: var(--collab-teal);
+}
+
+.swatchDot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.swatchName {
+  font-size: 0.68rem;
+  font-family: var(--font-serif);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* -- Font options -- */
+.fontOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.fontBtn {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  background: var(--off-white);
+  cursor: pointer;
+  transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
+}
+
+.fontBtn:hover {
+  border-color: var(--border-light);
+  color: var(--text-primary);
+}
+
+.fontBtn.activeFont {
+  border-color: var(--collab-teal);
+  color: var(--text-primary);
+  background: var(--collab-teal-dim);
+}
+
+/* -- Pill group -- */
+.pillGroup {
+  display: flex;
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.pillBtn {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  padding: 0.35rem 0.75rem;
+  background: var(--off-white);
+  border: none;
+  border-right: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: background var(--t-fast), color var(--t-fast);
+  white-space: nowrap;
+}
+
+.pillBtn:last-child {
+  border-right: none;
+}
+
+.pillBtn:hover {
+  color: var(--text-primary);
+  background: var(--sidebar-hover);
+}
+
+.pillBtn.activePill {
+  background: var(--collab-teal-dim);
+  color: var(--text-primary);
+}
+
+/* -- Setting divider -- */
+.settingDivider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 0.3rem 0;
+}
+
+/* -- Goal controls -- */
+.goalControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.goalInput {
+  width: 72px;
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  transition: border-color var(--t-fast);
+  -moz-appearance: textfield;
+}
+
+.goalInput::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.goalInput:focus {
+  outline: none;
+  border-color: var(--collab-teal);
+}
+
+.goalInput::-webkit-inner-spin-button,
+.goalInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* -- Stats row -- */
+.statsRow {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.statCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.75rem 0.5rem;
+  background: var(--off-white);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+.statValue {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.statLabelText {
+  font-family: var(--font-serif);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* -- Hint text -- */
+.settingHint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-family: var(--font-serif);
+  line-height: 1.5;
+  padding-left: calc(68px + 1rem);
+}
+
+/* -- Subscribe section -- */
+.subscribeSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--off-white);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+.subscribeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.subscribeLabel {
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.subscribeDesc {
+  font-family: var(--font-serif);
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.subscribeBtn {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  color: var(--warm-white);
+  background: var(--master-gold);
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity var(--t-fast);
+  flex-shrink: 0;
+}
+
+.subscribeBtn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.subscribeBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.checkoutError {
+  font-size: 0.73rem;
+  color: #b85050;
+  font-family: var(--font-serif);
+  margin: 0;
+  width: 100%;
+}
+
+/* -- Password form -- */
+.passwordForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.passwordHeading {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.pwField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.pwLabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-serif);
+}
+
+.pwField input {
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  transition: border-color var(--t-fast);
+}
+
+.pwField input:focus {
+  outline: none;
+  border-color: var(--collab-teal);
+}
+
+.pwMessage {
+  font-size: 0.75rem;
+  font-family: var(--font-serif);
+  margin: 0;
+}
+
+.pwError {
+  color: #b85050;
+}
+
+.pwSuccess {
+  color: var(--collab-teal);
+}
+
+.pwSubmit {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  color: var(--warm-white);
+  background: var(--collab-teal);
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: opacity var(--t-fast);
+  align-self: flex-start;
+}
+
+.pwSubmit:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.pwSubmit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* -- Footer / Logout -- */
+.settingsFooter {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.logoutBtn {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  cursor: pointer;
+  transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+}
+
+.logoutBtn:hover {
+  color: #b85050;
+  border-color: rgba(184, 80, 80, 0.3);
+  background: rgba(184, 80, 80, 0.06);
+}
