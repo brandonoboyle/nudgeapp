@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /app
+Disallow: /login
+Disallow: /signup
+Disallow: /verify-email
+Disallow: /api/
+
+Sitemap: https://writewithnudge.app/sitemap.xml
