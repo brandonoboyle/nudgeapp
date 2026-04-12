@@ -2,10 +2,10 @@ import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import { pool } from '@/lib/server/db';
+import { authConfig } from './auth.config';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-	secret: process.env.AUTH_SECRET,
-	session: { strategy: 'jwt', maxAge: 30 * 24 * 60 * 60 }, // 30 days
+	...authConfig,
 	providers: [
 		Credentials({
 			credentials: {
@@ -26,6 +26,4 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			}
 		})
 	],
-	pages: { signIn: '/login' },
-	trustHost: true
 });

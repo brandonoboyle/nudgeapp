@@ -49,7 +49,10 @@ export default function FolderTree({ folder, depth = 0, onFileOpen }: FolderTree
   const deleteFile = useProjectStore((s) => s.deleteFile);
   const deleteFolder = useProjectStore((s) => s.deleteFolder);
   const toggleFolderContext = useProjectStore((s) => s.toggleFolderContext);
-  const excludedFolderIds = useProjectStore((s) => s.getCurrentProject()?.excludedFolderIds ?? []);
+  const excludedFolderIds = useProjectStore((s) => {
+    const p = s.projects.find((proj) => proj.id === s.currentProjectId);
+    return p?.excludedFolderIds ?? [];
+  });
   const templateDepth = useSettingsStore((s) => s.settings.templateDepth);
 
   // Close menu on outside click

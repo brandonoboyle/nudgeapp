@@ -1,5 +1,8 @@
-import { auth } from '@/lib/auth';
+import NextAuth from 'next-auth';
+import { authConfig } from '@/lib/auth.config';
 import { NextResponse } from 'next/server';
+
+const { auth } = NextAuth(authConfig);
 
 const PUBLIC_ROUTES = ['/', '/login', '/signup', '/verify-email', '/api/auth', '/api/paddle/webhook'];
 
@@ -29,11 +32,12 @@ export default auth((req) => {
 	}
 
 	// Security headers
+	const isDev = process.env.NODE_ENV === 'development';
 	response.headers.set(
 		'Content-Security-Policy',
 		[
 			"default-src 'self'",
-			"script-src 'self' 'unsafe-inline' https://cdn.paddle.com",
+			`script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://cdn.paddle.com`,
 			"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.paddle.com https://sandbox-cdn.paddle.com",
 			"font-src 'self' https://fonts.gstatic.com https://cdn.paddle.com https://sandbox-cdn.paddle.com",
 			"img-src 'self' data: https://paddle.s3.amazonaws.com https://cdn.paddle.com https://sandbox-cdn.paddle.com",

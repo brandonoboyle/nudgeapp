@@ -206,19 +206,27 @@ interface ProjectState {
 
 let syncTimer: ReturnType<typeof setTimeout> | null = null;
 
+// Declared here, assigned once the store is created (see below).
+// This avoids closing over a stale `state` snapshot in the debounced sync.
+let storeGet: (() => ProjectState) | null = null;
+
 function save(state: { projects: Project[]; currentProjectId: string | null }) {
 	saveProjects(state.projects);
 	saveCurrentProjectId(state.currentProjectId);
 
-	// Debounced server sync
+	// Debounced server sync — reads latest state at fire time via get()
 	if (syncTimer) clearTimeout(syncTimer);
 	syncTimer = setTimeout(() => {
-		const p = state.projects.find((proj) => proj.id === state.currentProjectId);
+		const latest = storeGet?.();
+		if (!latest) return;
+		const p = latest.projects.find((proj) => proj.id === latest.currentProjectId);
 		if (p) syncProjectToServer(p);
 	}, 3000);
 }
 
-export const useProjectStore = create<ProjectState>((set, get) => ({
+export const useProjectStore = create<ProjectState>((set, get) => {
+storeGet = get;
+return ({
 	projects: [],
 	currentProjectId: null,
 
@@ -529,7 +537,19 @@ export const useProjectStore = create<ProjectState>((set, get) => ({
 			return { projects: [...state.projects] };
 		});
 	}
-}));
+});
+});
 
 // Re-export templates for convenience
 export { TEMPLATES };
+
+/**
+ * Selector hook for the current project. Uses a stable selector that only
+ * triggers re-renders when the current project identity actually changes,
+ * rather than on every state mutation.
+ */
+export function useCurrentProject(): Project | null {
+	return useProjectStore((s) =>
+		s.projects.find((p) => p.id === s.currentProjectId) ?? null
+	);
+}

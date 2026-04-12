@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import type { NudgeFolder, NudgeFile } from '@/lib/types';
-import { useProjectStore } from '@/lib/stores/projectStore';
+import { useCurrentProject } from '@/lib/stores/projectStore';
 import styles from './ExportModal.module.css';
 
 interface ExportModalProps {
@@ -35,7 +35,7 @@ export default function ExportModal({ open, onClose }: ExportModalProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
 
-  const currentProject = useProjectStore((s) => s.getCurrentProject());
+  const currentProject = useCurrentProject();
 
   const masterFileCount = useMemo(() => {
     if (!currentProject) return 0;

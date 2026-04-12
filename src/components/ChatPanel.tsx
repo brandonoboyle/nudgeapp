@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import type { Message } from '@/lib/types';
-import { useProjectStore } from '@/lib/stores/projectStore';
+import { useProjectStore, useCurrentProject } from '@/lib/stores/projectStore';
 import { useUIStore } from '@/lib/stores/uiStore';
 import { chat } from '@/lib/services/aiService';
 import ChatMessage from './ChatMessage';
@@ -17,7 +17,7 @@ export default function ChatPanel() {
   const messagesRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const currentProject = useProjectStore((s) => s.getCurrentProject());
+  const currentProject = useCurrentProject();
   const isInMasterFolder = useUIStore((s) => s.isInMasterFolder);
   const addMessage = useProjectStore((s) => s.addMessage);
   const updateLastAssistantMessage = useProjectStore((s) => s.updateLastAssistantMessage);

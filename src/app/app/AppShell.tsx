@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import type { NudgeFolder, NudgeFile, ProjectCore, TemplateDepth } from '@/lib/types';
-import { useProjectStore } from '@/lib/stores/projectStore';
+import { useProjectStore, useCurrentProject } from '@/lib/stores/projectStore';
 import { useUIStore } from '@/lib/stores/uiStore';
 import { useSettingsStore } from '@/lib/stores/settingsStore';
 import {
@@ -104,7 +104,7 @@ export default function AppShell({ userEmail }: AppShellProps) {
   // Store selectors
   const projects = useProjectStore((s) => s.projects);
   const currentProjectId = useProjectStore((s) => s.currentProjectId);
-  const project = useProjectStore((s) => s.getCurrentProject());
+  const project = useCurrentProject();
   const init = useProjectStore((s) => s.init);
   const hydrateFromServer = useProjectStore((s) => s.hydrateFromServer);
   const createProject = useProjectStore((s) => s.createProject);
