@@ -24,6 +24,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				if (!user.emailVerified) throw new Error('EmailNotVerified');
 				return { id: user.id, email: user.email, name: user.name };
 			}
+		}),
+		Credentials({
+			id: 'guest',
+			name: 'Guest',
+			credentials: {},
+			async authorize() {
+				const guestId = crypto.randomUUID();
+				return { id: guestId, email: `guest-${guestId}@guest.nudge.app`, name: 'Guest' };
+			}
 		})
 	],
 });

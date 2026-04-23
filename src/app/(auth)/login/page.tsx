@@ -21,6 +21,7 @@ function LoginForm() {
 		urlError ? (ERROR_MESSAGES[urlError] ?? ERROR_MESSAGES.Default) : null
 	);
 	const [loading, setLoading] = useState(false);
+	const [guestLoading, setGuestLoading] = useState(false);
 
 	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -43,42 +44,68 @@ function LoginForm() {
 		}
 	}
 
+	async function handleGuestSignIn() {
+		setGuestLoading(true);
+		setError(null);
+		const result = await signIn('guest', { redirect: false });
+		if (result?.error) {
+			setError(ERROR_MESSAGES.Default);
+			setGuestLoading(false);
+		} else {
+			window.location.href = '/app';
+		}
+	}
+
 	return (
-		<form className={styles.form} onSubmit={handleSubmit}>
-			{verified && (
-				<p className={styles.verified}>Email verified! You can now sign in.</p>
-			)}
+		<div className={styles.form}>
+			<form className={styles.form} onSubmit={handleSubmit}>
+				{verified && (
+					<p className={styles.verified}>Email verified! You can now sign in.</p>
+				)}
 
-			{error && <p className={styles.error}>{error}</p>}
+				{error && <p className={styles.error}>{error}</p>}
 
-			<div className={styles.field}>
-				<label className={styles.label} htmlFor="email">Email</label>
-				<input
-					className={styles.input}
-					id="email"
-					name="email"
-					type="email"
-					autoComplete="email"
-					required
-				/>
+				<div className={styles.field}>
+					<label className={styles.label} htmlFor="email">Email</label>
+					<input
+						className={styles.input}
+						id="email"
+						name="email"
+						type="email"
+						autoComplete="email"
+						required
+					/>
+				</div>
+
+				<div className={styles.field}>
+					<label className={styles.label} htmlFor="password">Password</label>
+					<input
+						className={styles.input}
+						id="password"
+						name="password"
+						type="password"
+						autoComplete="current-password"
+						required
+					/>
+				</div>
+
+				<button className={styles.submit} type="submit" disabled={loading}>
+					{loading ? 'Signing in...' : 'Sign in'}
+				</button>
+			</form>
+
+			<div className={styles.divider}>
+				<span>or</span>
 			</div>
 
-			<div className={styles.field}>
-				<label className={styles.label} htmlFor="password">Password</label>
-				<input
-					className={styles.input}
-					id="password"
-					name="password"
-					type="password"
-					autoComplete="current-password"
-					required
-				/>
-			</div>
-
-			<button className={styles.submit} type="submit" disabled={loading}>
-				{loading ? 'Signing in...' : 'Sign in'}
+			<button
+				className={styles.guestButton}
+				onClick={handleGuestSignIn}
+				disabled={guestLoading}
+			>
+				{guestLoading ? 'Starting guest session...' : 'Try as Guest'}
 			</button>
-		</form>
+		</div>
 	);
 }
 
